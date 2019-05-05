@@ -30,13 +30,17 @@ To gain practical, hands-on experience with:
 
 ## Prerequisites
 
-### Python
-
-To train the DQN, we will be running a local server using python. The
-
 ### Grasshopper
 
-d
+Grasshopper is a visual scripting language for the 3D modelling software, Rhino, which comes standard in [Rhino 6](https://www.rhino3d.com/). There are two Grasshopper plugins that are needed:
+- Grasshopper has a recursive loop avoidance check, which we can get around with [Hoopsnake](https://www.food4rhino.com/app/hoopsnake), and
+- as the in-built `GH_Python` component uses Iron Python (yuck!), we used [GH_CPython](https://www.food4rhino.com/app/ghcpython), which allows us to implement CPython in Grasshopper.
+
+### Python
+
+The training of the DQN will be run on a local server built in [python 3.5](https://www.python.org/downloads/release/python-357/)/[3.6](https://www.python.org/downloads/release/python-368/), which will communicate with Grasshopper through sockets. Two Python libraries are used:
+- the scientific computing library, [NumPy](https://www.numpy.org/), and
+- the machine learning library, [TensorFlow](https://www.python.org/downloads/release/python-368/).
 
 ## Training
 
