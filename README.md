@@ -32,7 +32,7 @@ To gain practical, hands-on experience with:
 
 The problem at hand is to create an artificially intelligent agent to steer a car along a road network. The agent is not given any information about the road itself. Instead, all it sees are the parameters at which its "sightlines" intersect with the edges of the road. As such, a robustly trained agent should be able to navigate any reasonable road network. At the end of the workshop, participants were given an hour to train their own agent. After, collating everyone's best models, we had a race on a road I called "the Gauntlet"!
 
-###### ![](gauntlet.gif)_A race between four workshop participants and the neural networks they trained in an hour, at the end of the workshop._
+###### ![](gauntlet.gif)<br>_A race between four workshop participants and the neural networks they trained in an hour, at the end of the workshop._
 
 ## Getting Started
 
