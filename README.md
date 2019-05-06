@@ -50,11 +50,12 @@ The training of the DQN will be run on a local server built in [python 3.5](http
 
 ## Training
 
-(TODO: Pre-flight checks).
+Before every training run starts, there are some pre-flight checks that need to be ticked off.
+1. First, have the `training.gh` file in Grasshopper. Within that file, find the Hoopsnake component, right-click the component, and click 'reset'. This needs to be done every time the training process is restarted.
+2. Open `training.py` in a text editor and make sure the two variables `INPUT_DIM` and `OUTPUT_DIM` are equivalent to the slider `Sight Line Count` and the number of items in the `Action` list in Grasshopper respectively.
+3. Find the two GH_CPython components in the `training.gh` file, double click them, and make sure the `PORT` variable is one that is not being used already. Further, make sure the two port numbers are the same as those in the `training.py` file.
 
-To start training the DQN, have Rhino and Grasshopper open with the `training.gh` file, and run `training.py` in a terminal.
-
-If everything is set up correctly, the terminal should output the following...
+Once all those are square, we can start training! To start training the DQN, have Rhino and Grasshopper open with the `training.gh` file, and run `training.py` in a terminal. If everything is set up correctly, the terminal should output the following...
 ```
 > python training.py
 _________________________________________________________________
@@ -120,32 +121,32 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 
 | Parameter Name | Data Type | Default | Range | Description |
 | -------------- | --------- | ------- | ----- | ----------- |
-| `INPUT_DIM`    | integer   | 16      | > 0   | (TODO) |
-| `OUTPUT_DIM`   | integer   | 3       | > 0   | (TODO) |
+| `INPUT_DIM`    | integer   | 16      | > 0   | The number of input neurons in the neural network. This value should be the same as the `Sight Line Count` slider in Grasshopper. |
+| `OUTPUT_DIM`   | integer   | 3       | > 0   | The number of output neurons in the neural network. This value should be the same as the number of actions stated in the `Actions` panel in Grasshopper. |
 
 ### Learning Algorithm Parameters
 
 | Parameter Name    | Data Type | Default | Range    | Description |
 | ----------------- | --------- | ------- | -------- | ----------- |
-| `ALPHA`           | float     | 1       | > 0      | (TODO) |
-| `GAMMA`           | float     | 0.5     | > 0, < 1 | (TODO) |
-| `LAMBDA`          | float     | 0.005   | > 0, < 1 | (TODO) |
-| `INITIAL_EPSILON` | float     | 0.8     | > 0, < 1 | (TODO) |
-| `FINAL_EPSILON`   | float     | 0.05    | > 0, < 1 | (TODO) |
-| `MAX_MEMORY`      | integer   | 10000   | > 0      | (TODO) |
-| `BATCH_SIZE`      | integer   | 64      | > 0      | (TODO) |
+| `ALPHA`           | float     | 1       | > 0      | Effectively, learning rate. |
+| `GAMMA`           | float     | 0.5     | > 0,<br>< 1 | Discount factor. The factor, which is consecutively multiplied by the highest predicted q-value (`q_s_a_d`) of the next state, that determines the worth the policy places on future rewards. The larger the `GAMMA`, the more the agent will favour long-term rewards. |
+| `LAMBDA`          | float     | 0.005   | > 0,<br>< 1 | The rate at which `epsilon` decays. `epsilon`, used in the ε-greedy policy, allows the agent to conduct random actions, to balance exploitation with exploration. The larger the number, the faster `epsilon` decays. |
+| `INITIAL_EPSILON` | float     | 0.8     | > 0,<br>< 1 | The value of `epsilon` at iteration 0. |
+| `FINAL_EPSILON`   | float     | 0.05    | > 0,<br>< 1 | The minimum value of `epsilon` that it decays to. |
+| `MAX_MEMORY`      | integer   | 10000   | > 0      | The maximum number of `(prev_state, action, reward, state_in)` tuples that are stored in memory before the oldest ones are removed. |
+| `BATCH_SIZE`      | integer   | 64      | > 0      | The number of `(prev_state, action, reward, state_in)` tuples that are sampled from memory to undergo experience-replay. |
 
 ### Training Parameters
 
 | Parameter Name    | Data Type | Default           | Range | Description |
 | ----------------- | --------- | ----------------- | ----- | ----------- |
-| `ITERATIONS`      | integer   | 2000              | > 0   | (TODO) |
-| `TIMEOUT`         | integer   | 10                | > 0   | (TODO) |
-| `MODEL_SAVE_FREQ` | integer   | 50                | > 0   | (TODO) |
-| `MODEL_SAVE_PATH` | string    | 'D:\\DRL\\models' | -     | (TODO) |
+| `ITERATIONS`      | integer   | 2000              | > 0   | The number of iterations you would like your model to train for. |
+| `TIMEOUT`         | integer   | 10                | > 0   | The time in seconds after the terminal outputs `Start Loop in GH Client...` to receive data from Grasshopper, before it times out. |
+| `MODEL_SAVE_FREQ` | integer   | 50                | > 0   | The number of iterations between each time a model is saved to the model directory. |
+| `MODEL_SAVE_PATH` | string    | 'D:\\DRL\\models' | -     | The path to the model directory, where all `.h5` files are saved. |
 
 ## Acknowledgements
 
-As always, thank you to Alessandra Fabbri and M. Hank Haeusler, who's guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a giant thank you to the 16 participants who came, participated, and helped me find my love of teaching. Hope to see you in the next one!
+As always, thank you to mu supervisors, Alessandra Fabbri and M. Hank Haeusler, who's constant guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a big thank you to the sixteen participants who came, participated, and helped me find my love of teaching. Hope to see you in the next one!
 
 ###### ![](workshop_participants.jpg)_Workshop Participants and Chair (from left to right): Marirena Kladeftira, Matthias Leschok, Spencer Steenblik, Siliang Lu, Gen Karoji, Jack Mao, Likai Wang, Maia Zheliazkova, Max Marschall, Nariddh Khean, Maryam Mianji, Tania Papasotiriou, Chryslin Lin, Aswin Indraprastha, Bing Zhao, Wei Yan, Kateryna Koniaeva._
