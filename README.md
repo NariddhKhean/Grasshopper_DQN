@@ -32,7 +32,7 @@ To gain practical, hands-on experience with:
 
 The problem at hand is to create an artificially intelligent agent to steer a car along a road network. The agent is not given any information about the road itself. Instead, all it sees are the parameters at which its "sightlines" intersect with the edges of the road. As such, a robustly trained agent should be able to navigate any reasonable road network. At the end of the workshop, participants were given an hour to train their own agent. After, collating everyone's best models, we had a race on a road I called "the Gauntlet"!
 
-###### ![](media/gauntlet.gif)<br>_A race between four workshop participants and the neural networks they trained in an hour, at the end of the workshop._
+###### ![](media/gauntlet.gif)<br>_A race between four workshop participants and the neural networks they trained in an hour._
 
 ## Getting Started
 
@@ -113,7 +113,7 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 
 ## Deployment
 
-(TODO: Deployment code and documentation).
+(TODO: Deployment script, code, and documentation).
 
 ## Parameters
 
@@ -129,7 +129,7 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 | Parameter Name    | Data Type | Default | Range    | Description |
 | ----------------- | --------- | ------- | -------- | ----------- |
 | `ALPHA`           | float     | 1       | > 0      | Effectively, learning rate. |
-| `GAMMA`           | float     | 0.5     | > 0,<br>< 1 | Discount factor. The factor, which is consecutively multiplied by the highest predicted q-value (`q_s_a_d`) of the next state, that determines the worth the policy places on future rewards. The larger the `GAMMA`, the more the agent will favour long-term rewards. |
+| `GAMMA`           | float     | 0.5     | > 0,<br>< 1 | Discount factor. The factor, which is consecutively multiplied by the highest predicted q-value of the next state (`q_s_a_d`), that determines the worth the policy places on future rewards. The larger the `GAMMA`, the more the agent will favour long-term rewards. |
 | `LAMBDA`          | float     | 0.005   | > 0,<br>< 1 | The rate at which `epsilon` decays. `epsilon`, used in the ε-greedy policy, allows the agent to conduct random actions, to balance exploitation with exploration. The larger the number, the faster `epsilon` decays. |
 | `INITIAL_EPSILON` | float     | 0.8     | > 0,<br>< 1 | The value of `epsilon` at iteration 0. |
 | `FINAL_EPSILON`   | float     | 0.05    | > 0,<br>< 1 | The minimum value of `epsilon` that it decays to. |
