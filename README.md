@@ -2,7 +2,7 @@
 
 This is the official repository for the 2019 _CAADRIA_ workshop that took place at the Victoria University of Wellington, New Zealand, on the 13<sup>th</sup> and 14<sup>th</sup> of April: "__WS.4 Deep Reinforcement Learning in Grasshopper - Using Deep Q-Networks to Train an Intelligent Agent to Act in a Grasshopper Environment__".
 
-![](hero_slide.jpg)
+![](media/hero_slide.jpg)
 
 ## Workshop Chairs
 
@@ -32,7 +32,7 @@ To gain practical, hands-on experience with:
 
 The problem at hand is to create an artificially intelligent agent to steer a car along a road network. The agent is not given any information about the road itself. Instead, all it sees are the parameters at which its "sightlines" intersect with the edges of the road. As such, a robustly trained agent should be able to navigate any reasonable road network. At the end of the workshop, participants were given an hour to train their own agent. After, collating everyone's best models, we had a race on a road I called "the Gauntlet"!
 
-###### ![](gauntlet.gif)<br>_A race between four workshop participants and the neural networks they trained in an hour, at the end of the workshop._
+###### ![](media/gauntlet.gif)<br>_A race between four workshop participants and the neural networks they trained in an hour, at the end of the workshop._
 
 ## Getting Started
 
@@ -46,7 +46,7 @@ Grasshopper is a visual scripting language for the 3D modelling software, Rhino,
 
 The training of the DQN will be run on a local server built in [python 3.5](https://www.python.org/downloads/release/python-357/)/[3.6](https://www.python.org/downloads/release/python-368/), which will communicate with Grasshopper through sockets. Two Python libraries are used:
 - the scientific computing library, [NumPy](https://www.numpy.org/), and
-- the machine learning library, [TensorFlow](https://www.python.org/downloads/release/python-368/).
+- the machine learning library, [TensorFlow](https://www.tensorflow.org/install).
 
 ## Training
 
@@ -122,7 +122,7 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 | Parameter Name | Data Type | Default | Range | Description |
 | -------------- | --------- | ------- | ----- | ----------- |
 | `INPUT_DIM`    | integer   | 16      | > 0   | The number of input neurons in the neural network. This value should be the same as the `Sight Line Count` slider in Grasshopper. |
-| `OUTPUT_DIM`   | integer   | 3       | > 0   | The number of output neurons in the neural network. This value should be the same as the number of actions stated in the `Actions` panel in Grasshopper. |
+| `OUTPUT_DIM`   | integer   | 3       | > 0   | The number of output neurons in the neural network. This value should be the same as the number of actions in the `Actions` panel in Grasshopper. |
 
 ### Learning Algorithm Parameters
 
@@ -147,6 +147,6 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 
 ## Acknowledgements
 
-As always, thank you to mu supervisors, Alessandra Fabbri and M. Hank Haeusler, who's constant guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a big thank you to the sixteen participants who came, participated, and helped me find my love of teaching. Hope to see you in the next one!
+As always, thank you to my supervisors, Alessandra Fabbri and M. Hank Haeusler, who's constant guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a big thank you to the sixteen participants who came, participated, and helped me find my love of teaching. Hope to see you in the next one!
 
-###### ![](workshop_participants.jpg)_Workshop Participants and Chair (from left to right): Marirena Kladeftira, Matthias Leschok, Spencer Steenblik, Siliang Lu, Gen Karoji, Jack Mao, Likai Wang, Maia Zheliazkova, Max Marschall, Nariddh Khean, Maryam Mianji, Tania Papasotiriou, Chryslin Lin, Aswin Indraprastha, Bing Zhao, Wei Yan, Kateryna Koniaeva._
+###### ![](media/workshop_participants.jpg)_Workshop Participants and Chair (from left to right): Marirena Kladeftira, Matthias Leschok, Spencer Steenblik, Siliang Lu, Gen Karoji, Jack Mao, Likai Wang, Maia Zheliazkova, Max Marschall, Nariddh Khean, Maryam Mianji, Tania Papasotiriou, Chryslin Lin, Aswin Indraprastha, Bing Zhao, Wei Yan, Kateryna Koniaeva._
