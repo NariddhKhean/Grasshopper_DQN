@@ -109,11 +109,32 @@ These `.h5` files are what we care about. Within are the weights and biases of t
 
 By default, I've added a 10 second timeout for when the socket is waiting for data from Grasshopper, so that it doesn't hang indefinitely. If you receive the `socket.timeout: timed out` error, simply rerun the `training.py` file and start the loop in Grasshopper a tad quicker (or change the `TIMEOUT` parameter in the `training.py` file to something more manageable).
 
+An interesting thing to note can be seen when observing the performance of the DQN during training. Since I've made training steps occur after every iteration, as opposed to after each episode, the ability for long-term planning becomes unstable, as its "brain" is changing at every step. The reason I've made it this way is due to the comparatively slow iteration time that we have to deal with in Grasshopper. The point is, once you save a model, and let that model alone traverse a road, it should exhibit more stable behaviour.
+
 > Note: After every training run, don't forget the reset the hoopsnake component in Grasshopper!
 
 ## Deployment
 
-(TODO: Deployment script, code, and documentation).
+Once you've trained a DQN, and you have some models saved in your designated model directory, you can load one of those models and see how it performs on a new road.
+
+Similar set-up steps as before:
+1. Have the `deploy.gh` file in Grasshopper. Again, Hoopsnake should be reset before each run.
+2. Open `deploy.py` in a text editor and make sure the `INPUT_DIM` variable is the same as the `Sight Line Count` slider in Grasshopper.
+3. Find the GH_CPython component in the `deploy.gh` file, and make sure the port number is the same as in the `deploy.py` file.
+
+After you see `Start Loop in GH Client...` in the terminal, start the Hoopsnake component and the terminal should output something like:
+```
+  ... connected.
+
+  ITERATION: 1
+  state       = [0.643712854056232, 0.696352339453148, 0.784533288702983, ...
+  q-estimates = [0.043717995285987854, -0.17392410337924957, 0.1835426241159439]
+  action      = 2
+```
+
+Since we are deploying a trained model, not training it, we won't allow it to make any random actions based on the e-greedy policy, nor are we providing the DQL algorithm with a reward. The former is a method to address the exploration vs exploitation problem, and the latter is used as a reward/punishment metric, both of which are only needed when training.
+
+> Note: If the car collides with the edge of the road, the visualisation will stop the car, but the loops will continue. Be sure to kill the python loop, or let it timeout after you stop the Hoopsnake loop.
 
 ## Parameters
 
@@ -144,9 +165,10 @@ By default, I've added a 10 second timeout for when the socket is waiting for da
 | `TIMEOUT`         | integer   | 10                | > 0   | The time in seconds after the terminal outputs `Start Loop in GH Client...` to receive data from Grasshopper, before it times out. |
 | `MODEL_SAVE_FREQ` | integer   | 50                | > 0   | The number of iterations between each time a model is saved to the model directory. |
 | `MODEL_SAVE_PATH` | string    | 'D:\\DRL\\models' | -     | The path to the model directory, where all `.h5` files are saved. |
+| `MODEL_NAME`      | string    | '2500.h5'         | -     | The name of the model in the model directory to deploy. |
 
 ## Acknowledgements
 
-As always, thank you to my supervisors, Alessandra Fabbri and M. Hank Haeusler, who's constant guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a big thank you to the sixteen participants who came, participated, and helped me find my love of teaching. Hope to see you in the next one!
+As always, thank you to my supervisors, Alessandra Fabbri and M. Hank Haeusler, who's constant guidance and encouragement made this workshop happen. Thank you to the CAADRIA team and the Victoria University of Wellington for holding a wonderful conference. And, a big thank you to the sixteen participants who came, got involved, and helped me find my love of teaching. Hope to see you in the next one!
 
 ###### ![](media/workshop_participants.jpg)_Workshop Participants and Chair (from left to right): Marirena Kladeftira, Matthias Leschok, Spencer Steenblik, Siliang Lu, Gen Karoji, Jack Mao, Likai Wang, Maia Zheliazkova, Max Marschall, Nariddh Khean, Maryam Mianji, Tania Papasotiriou, Chryslin Lin, Aswin Indraprastha, Bing Zhao, Wei Yan, Kateryna Koniaeva._
